@@ -6304,7 +6304,7 @@ var PathItem = Item.extend({
 
 	setPathData: function(data) {
     
-    data = data.replace(/zz+/ig,'Z');
+    //data = data.replace(/zz+/ig,'Z');
 		var parts = data.match(/[mlhvcsqtaz][^mlhvcsqtaz]*/ig),
 			coords,
 			relative = false,
