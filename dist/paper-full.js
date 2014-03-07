@@ -6353,7 +6353,7 @@ var PathItem = Item.extend({
 				control = current;
 				break;
 			case 'c':
-			  if (previous!='z' && previous!='Z') this.moveTo(current);
+			  //if (previous!='z' && previous!='Z') this.moveTo(current);
 				for (var j = 0; j < length; j += 6) {
 					this.cubicCurveTo(
 							getPoint(j),
