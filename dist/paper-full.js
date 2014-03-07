@@ -6303,7 +6303,8 @@ var PathItem = Item.extend({
 	},
 
 	setPathData: function(data) {
-
+    
+    data = data.replace(/zz+/ig,'Z');
 		var parts = data.match(/[mlhvcsqtaz][^mlhvcsqtaz]*/ig),
 			coords,
 			relative = false,
@@ -6397,7 +6398,7 @@ var PathItem = Item.extend({
 				  this.cubicCurveTo(new Point(segs[k], segs[k+1]), new Point(segs[k+2], segs[k+3]), new Point(segs[k+4], segs[k+5]));
 				break;
 			case 'z':
-			  if (previous!='z' && previous!='Z')
+			  //if (previous!='z' && previous!='Z')
 				this.closePath();
 				break;
 			}
