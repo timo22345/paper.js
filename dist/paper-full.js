@@ -7589,7 +7589,7 @@ var Path = PathItem.extend({
 			var first = this.getFirstSegment(),
 				last = this.getLastSegment();
 			if (first !== last && first._point.equals(last._point)) {
-				first.setHandleIn(last._handleIn);
+				//first.setHandleIn(last._handleIn);
 				//last.remove();
 			}
 			this.setClosed(true);
