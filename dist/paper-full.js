@@ -7580,7 +7580,7 @@ var Path = PathItem.extend({
 			}
 		},
 
-		closePath: function(firstI, lastI) {
+		closePath: function() {
 			  var first = this.getFirstSegment(),
 			  last = this.getLastSegment();
 			if (first !== last && first._point.equals(last._point)) {
