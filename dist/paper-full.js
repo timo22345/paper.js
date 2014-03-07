@@ -6501,7 +6501,6 @@ var Path = PathItem.extend({
 	},
 
 	getLastSegment: function() {
-	console.log("joo");
 		return this._segments[this._segments.length - 1];
 	},
 
@@ -7588,7 +7587,7 @@ var Path = PathItem.extend({
 				first.setHandleIn(last._handleIn);
 				last.remove();
 			}
-			this.setClosed(true);
+			this.setClosed(false);
 		}
 	};
 }, {  
