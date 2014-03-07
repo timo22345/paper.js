@@ -6400,6 +6400,7 @@ var PathItem = Item.extend({
 				break;
 			case 'z':
 				this.closePath();
+				this.lineTo(current);
 				break;
 			}
 			previous = command;
