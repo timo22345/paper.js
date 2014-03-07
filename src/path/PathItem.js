@@ -12,6 +12,7 @@
 
 (function(){
 var PI = Math.PI;
+
 function cacher(f, scope, postprocessor)
 {
   function newf()
