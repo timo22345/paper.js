@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Fri Mar 7 18:49:50 2014 +0200
+ * Date: Fri Mar 7 19:07:02 2014 +0200
  *
  ***
  *
@@ -2492,7 +2492,9 @@ var Project = PaperScopeItem.extend({
 			ctx.save();
 			ctx.strokeWidth = 1;
 			for (var id in this._selectedItems) {
-				var item = this._selectedItems[id];
+				var item = this._selectedItems[id],
+					size = this.options.handleSize || 4;
+					half = size / 2;
 				if (item._updateVersion === this._updateVersion
 						&& (item._drawSelected || item._boundsSelected)) {
 					var color = item.getSelectedColor()
@@ -2511,11 +2513,9 @@ var Project = PaperScopeItem.extend({
 									coords[i], coords[++i]);
 						ctx.closePath();
 						ctx.stroke();
-						for (var i = 0; i < 8; i++) {
-							ctx.beginPath();
-							ctx.rect(coords[i] - 2, coords[++i] - 2, 4, 4);
-							ctx.fill();
-						}
+						for (var i = 0; i < 8; i++)
+							ctx.fillRect(coords[i] - half, coords[++i] - half,
+									size, size);
 					}
 				}
 			}
@@ -7064,17 +7064,13 @@ var Path = PathItem.extend({
 				drawHandle(2);
 			if (state & 2)
 				drawHandle(4);
-			ctx.save();
-			ctx.beginPath();
-			ctx.rect(pX - half, pY - half, size, size);
-			ctx.fill();
+			ctx.fillRect(pX - half, pY - half, size, size);
 			if (!(state & 4)) {
-				ctx.beginPath();
-				ctx.rect(pX - half + 1, pY - half + 1, size - 2, size - 2);
+				var fillStyle = ctx.fillStyle;
 				ctx.fillStyle = '#ffffff';
-				ctx.fill();
+				ctx.fillRect(pX - half + 1, pY - half + 1, size - 2, size - 2);
+				ctx.fillStyle = fillStyle;
 			}
-			ctx.restore();
 		}
 	}
 
@@ -7297,7 +7293,7 @@ var Path = PathItem.extend({
 }, new function() { 
 	function getCurrentSegment(that) {
 		var segments = that._segments;
-		if (segments.length == 0)
+		if (segments.length === 0)
 			throw new Error('Use a moveTo() command first');
 		return segments[segments.length - 1];
 	}
@@ -7935,10 +7931,11 @@ var CompoundPath = PathItem.extend({
 		}
 	}
 }, new function() { 
-	function getCurrentPath(that) {
-		if (!that._children.length)
+	function getCurrentPath(that, check) {
+		var children = that._children;
+		if (check && children.length === 0)
 			throw new Error('Use a moveTo() command first');
-		return that._children[that._children.length - 1];
+		return children[children.length - 1];
 	}
 
 	var fields = {
@@ -7951,12 +7948,14 @@ var CompoundPath = PathItem.extend({
 		},
 
 		moveBy: function() {
-			this.moveTo(getCurrentPath(this).getLastSegment()._point.add(
-					Point.read(arguments)));
+			var current = getCurrentPath(this, true),
+				last = current && current.getLastSegment(),
+				point = Point.read(arguments);
+			this.moveTo(last ? point.add(last._point) : point);
 		},
 
 		closePath: function() {
-			getCurrentPath(this).closePath();
+			getCurrentPath(this, true).closePath();
 		}
 	};
 
@@ -7964,7 +7963,7 @@ var CompoundPath = PathItem.extend({
 			'lineBy', 'cubicCurveBy', 'quadraticCurveBy', 'curveBy', 'arcBy'],
 			function(key) {
 				fields[key] = function() {
-					var path = getCurrentPath(this);
+					var path = getCurrentPath(this, true);
 					path[key].apply(path, arguments);
 				};
 			}
