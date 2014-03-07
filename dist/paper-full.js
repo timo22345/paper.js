@@ -6404,6 +6404,7 @@ var PathItem = Item.extend({
 				this.lineTo(subpath);
 				current = subpath;
 				control = current;
+				this.closePath();
 				break;
 			}
 			previous = command;
