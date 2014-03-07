@@ -6342,7 +6342,7 @@ var PathItem = Item.extend({
 					this[j === 0 && lower === 'm' ? 'moveTo' : 'lineTo'](
 							current = getPoint(j));
 				control = current;
-				if(lower == 'm') var subpath = current;
+				if(lower == 'm') var subpath = i;
 				break;
 			case 'h':
 			case 'v':
@@ -6399,7 +6399,7 @@ var PathItem = Item.extend({
 				  this.cubicCurveTo(new Point(segs[k], segs[k+1]), new Point(segs[k+2], segs[k+3]), new Point(segs[k+4], segs[k+5]));
 				break;
 			case 'z':
-				this.closePath();
+				this.closePath(subpath, i);
 				break;
 			}
 			previous = command;
@@ -6564,7 +6564,20 @@ var Path = PathItem.extend({
 		return this._closed;
 	},
 
-	setClosed: function(closed) {
+	setClosed: function(closed, firstI, lastI) {
+		if (this._closed != (closed = !!closed)) {
+			this._closed = closed;
+			if (this._curves) {
+				var length = this._curves.length = this._countCurves();
+				if (closed)
+					this._curves[lastI] = new Curve(this,
+						this._segments[lastI], this._segments[firstI]);
+			}
+			this._changed(5);
+		}
+	},
+
+	setClosed2: function(closed) {
 		if (this._closed != (closed = !!closed)) {
 			this._closed = closed;
 			if (this._curves) {
@@ -7580,14 +7593,23 @@ var Path = PathItem.extend({
 			}
 		},
 
-		closePath: function() {
-			var first = this.getFirstSegment(),
-				last = this.getLastSegment();
+		closePath: function(firstI, lastI) {
+				var first = this._segments[firstI],
+			  last = this._segments[lastI];
 			if (first !== last && first._point.equals(last._point)) {
 				first.setHandleIn(last._handleIn);
 				last.remove();
 			}
-			this.setClosed(false);
+			this.setClosed(true, firstI, lastI);
+		},
+		closePath2: function(firstI, lastI) {
+			  var first = this.getFirstSegment(),
+			  last = this.getLastSegment();
+			if (first !== last && first._point.equals(last._point)) {
+				first.setHandleIn(last._handleIn);
+				last.remove();
+			}
+			this.setClosed(true);
 		}
 	};
 }, {  
