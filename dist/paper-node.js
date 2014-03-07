@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Fri Mar 7 21:57:45 2014 +0200
+ * Date: Fri Mar 7 21:59:58 2014 +0200
  *
  ***
  *
@@ -6394,7 +6394,6 @@ var PathItem = Item.extend({
 				break;
 			case 't':
 				for (var j = 0; j < length; j += 2) {
-					console.log(previous, /[qt]/i.test(previous));
 					this.quadraticCurveTo(
 							control = (/[qt]/i.test(previous)
 									? current.multiply(2).subtract(control)
