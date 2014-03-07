@@ -6342,6 +6342,7 @@ var PathItem = Item.extend({
 					this[j === 0 && lower === 'm' ? 'moveTo' : 'lineTo'](
 							current = getPoint(j));
 				control = current;
+				if(lower == 'm') var subpath = current;
 				break;
 			case 'h':
 			case 'v':
@@ -6401,6 +6402,7 @@ var PathItem = Item.extend({
 			case 'z':
 			  //if (previous!='z' && previous!='Z')
 				this.closePath();
+				current = subpath; 
 				break;
 			}
 			previous = command;
