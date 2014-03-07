@@ -6403,7 +6403,7 @@ var PathItem = Item.extend({
 			  //if (previous!='z' && previous!='Z')
 				this.closePath();
 				this.lineTo(subpath);
-				current = subpath;
+				//current = subpath;
 				break;
 			}
 			previous = command;
