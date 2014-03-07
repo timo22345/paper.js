@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Fri Mar 7 21:55:08 2014 +0200
+ * Date: Fri Mar 7 21:57:45 2014 +0200
  *
  ***
  *
@@ -6093,6 +6093,7 @@ var CurveLocation = Base.extend({
 
 (function(){
 var PI = Math.PI;
+
 function cacher(f, scope, postprocessor)
 {
   function newf()
