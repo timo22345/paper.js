@@ -7585,12 +7585,11 @@ var Path = PathItem.extend({
 		},
 
 		closePath: function() {
-			console.log("joo");
 			var first = this.getFirstSegment(),
 				last = this.getLastSegment();
 			if (first !== last && first._point.equals(last._point)) {
-				//first.setHandleIn(last._handleIn);
-				//last.remove();
+				first.setHandleIn(last._handleIn);
+				last.remove();
 			}
 			this.setClosed(true);
 		}
