@@ -6402,7 +6402,7 @@ var PathItem = Item.extend({
 			case 'z':
 			  //if (previous!='z' && previous!='Z')
 				this.closePath();
-				this.lineTo(subpath);
+				//this.lineTo(subpath);
 				//current = subpath;
 				break;
 			}
@@ -7585,11 +7585,12 @@ var Path = PathItem.extend({
 		},
 
 		closePath: function() {
+			console.log("joo");
 			var first = this.getFirstSegment(),
 				last = this.getLastSegment();
 			if (first !== last && first._point.equals(last._point)) {
 				first.setHandleIn(last._handleIn);
-				last.remove();
+				//last.remove();
 			}
 			this.setClosed(true);
 		}
