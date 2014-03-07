@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Fri Mar 7 22:00:26 2014 +0200
+ * Date: Fri Mar 7 22:04:06 2014 +0200
  *
  ***
  *
@@ -6403,6 +6403,7 @@ var PathItem = Item.extend({
 				}
 				break;
 			case 'a':
+
 				var segs = a2c(current.x, current.y, +coords[0], +coords[1], +coords[2], +coords[3], +coords[4], !relative? +coords[5]:+coords[5]+current.x, !relative? +coords[6]:+coords[6]+current.y);
 	      current.x = !relative? +coords[5]: +coords[5]+current.x;
 	      current.y = !relative? +coords[6]: +coords[6]+current.y;
