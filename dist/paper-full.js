@@ -6401,9 +6401,9 @@ var PathItem = Item.extend({
 				break;
 			case 'z':
 			  //if (previous!='z' && previous!='Z')
-				this.closePath();
-				//this.lineTo(subpath);
-				//current = subpath;
+				//this.closePath();
+				this.lineTo(subpath);
+				current = subpath;
 				break;
 			}
 			previous = command;
