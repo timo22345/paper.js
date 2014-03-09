@@ -6400,7 +6400,7 @@ var PathItem = Item.extend({
 				  this.cubicCurveTo(new Point(segs[k], segs[k+1]), new Point(segs[k+2], segs[k+3]), new Point(segs[k+4], segs[k+5]));
 				break;
 			case 'z':
-				this.closePath();
+				//this.closePath();
 				current = subpathstart;
 				break;
 			}
