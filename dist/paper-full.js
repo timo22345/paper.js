@@ -6404,15 +6404,19 @@ var PathItem = Item.extend({
         for (var k = 0, klen = segs.length; k < klen; k += 6)
 				{
 				  this.cubicCurveTo(new Point(segs[k], segs[k+1]), new Point(segs[k+2], segs[k+3]), new Point(segs[k+4], segs[k+5]));
-          current = new Point(segs[k+4], segs[k+5]);
+          //current = new Point(segs[k+4], segs[k+5]);
         }
 				break;
 			case 'z':
-				//this.closePath();
-				current = subpathstart;
-				this.lineTo(current);
-				this.moveTo(current);
+				if (!(/[z]/i.test(previous))
+				{
+				  //this.closePath();
+				  current = subpathstart;
+				  this.lineTo(current);
+				  this.moveTo(current);
+				}
 				break;
+			  
 			}
 			previous = command;
 		}
