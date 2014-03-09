@@ -6395,8 +6395,8 @@ var PathItem = Item.extend({
 				var segs = a2c(current.x, current.y, +coords[0], +coords[1], +coords[2], +coords[3], +coords[4],
 				            !relative? +coords[5]: +coords[5] + current.x,
 				            !relative? +coords[6]: +coords[6] + current.y);
-	      current.x = !relative? +coords[5]: +coords[5] + current.x;
-	      current.y = !relative? +coords[6]: +coords[6] + current.y;
+	      //current.x = !relative? +coords[5]: +coords[5] + current.x;
+	      //current.y = !relative? +coords[6]: +coords[6] + current.y;
 
 	      //current.x = +coords[5];
 	      //current.y = +coords[6];
