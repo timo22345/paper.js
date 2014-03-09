@@ -6392,15 +6392,18 @@ var PathItem = Item.extend({
 				}
 				break;
 			case 'a':
-				var segs = a2c(current.x, current.y, +coords[0], +coords[1], +coords[2], +coords[3], +coords[4], !relative? +coords[5]:+coords[5]+current.x, !relative? +coords[6]:+coords[6]+current.y);
-	      current.x = !relative? +coords[5]: +coords[5]+current.x;
-	      current.y = !relative? +coords[6]: +coords[6]+current.y;
+				var segs = a2c(current.x, current.y, +coords[0], +coords[1], +coords[2], +coords[3], +coords[4],
+				            !relative? +coords[5]: +coords[5] + current.x,
+				            !relative? +coords[6]: +coords[6] + current.y);
+	      current.x = !relative? +coords[5]: +coords[5] + current.x;
+	      current.y = !relative? +coords[6]: +coords[6] + current.y;
 
 	      //current.x = +coords[5];
 	      //current.y = +coords[6];
 
         for (var k = 0, klen = segs.length; k < klen; k += 6)
 				  this.cubicCurveTo(new Point(segs[k], segs[k+1]), new Point(segs[k+2], segs[k+3]), new Point(segs[k+4], segs[k+5]));
+        current = new Point(segs[k+4], segs[k+5]);
 				break;
 			case 'z':
 				//this.closePath();
