@@ -6402,6 +6402,8 @@ var PathItem = Item.extend({
 			case 'z':
 				//this.closePath();
 				current = subpathstart;
+				this.lineTo(current);
+				this.moveTo(current);
 				break;
 			}
 			previous = command;
