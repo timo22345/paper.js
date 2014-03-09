@@ -6414,6 +6414,7 @@ var PathItem = Item.extend({
 				  current = subpathstart;
 				  this.lineTo(current);
 				  this.moveTo(current);
+
 				}
 				break;
 			}
