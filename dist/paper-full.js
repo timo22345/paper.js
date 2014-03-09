@@ -6402,8 +6402,10 @@ var PathItem = Item.extend({
 	      //current.y = +coords[6];
 
         for (var k = 0, klen = segs.length; k < klen; k += 6)
+				{
 				  this.cubicCurveTo(new Point(segs[k], segs[k+1]), new Point(segs[k+2], segs[k+3]), new Point(segs[k+4], segs[k+5]));
-        current = new Point(segs[k+4], segs[k+5]);
+          current = new Point(segs[k+4], segs[k+5]);
+        }
 				break;
 			case 'z':
 				//this.closePath();
