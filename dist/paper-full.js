@@ -6416,7 +6416,6 @@ var PathItem = Item.extend({
 				  this.moveTo(current);
 				}
 				break;
-			  
 			}
 			previous = command;
 		}
