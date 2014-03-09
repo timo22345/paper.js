@@ -6310,7 +6310,8 @@ var PathItem = Item.extend({
 			relative = false,
 			previous,
 			control,
-			current = new Point();
+			current = new Point(),
+			subpathstart = new Point();
 
 		function getCoord(index, coord) {
 			var val = parseFloat(coords[index]);
@@ -6342,7 +6343,7 @@ var PathItem = Item.extend({
 					this[j === 0 && lower === 'm' ? 'moveTo' : 'lineTo'](
 							current = getPoint(j));
 				control = current;
-				if(lower == 'm') var subpath = i;
+				if(lower == 'm') subpathstart = current;
 				break;
 			case 'h':
 			case 'v':
@@ -6400,6 +6401,7 @@ var PathItem = Item.extend({
 				break;
 			case 'z':
 				this.closePath();
+				current = subpathstart;
 				break;
 			}
 			previous = command;
