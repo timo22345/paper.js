@@ -6396,8 +6396,8 @@ var PathItem = Item.extend({
 	      current.x = !relative? +coords[5]: +coords[5]+current.x;
 	      current.y = !relative? +coords[6]: +coords[6]+current.y;
 
-	      current.x = +coords[5];
-	      current.y = +coords[6];
+	      //current.x = +coords[5];
+	      //current.y = +coords[6];
 
         for (var k = 0, klen = segs.length; k < klen; k += 6)
 				  this.cubicCurveTo(new Point(segs[k], segs[k+1]), new Point(segs[k+2], segs[k+3]), new Point(segs[k+4], segs[k+5]));
