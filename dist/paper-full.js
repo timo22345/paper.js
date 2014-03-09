@@ -6408,7 +6408,7 @@ var PathItem = Item.extend({
         }
 				break;
 			case 'z':
-				if (!(/[z]/i.test(previous))
+				if (!(/[z]/i.test(previous)))
 				{
 				  //this.closePath();
 				  current = subpathstart;
